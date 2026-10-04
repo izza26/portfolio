@@ -54,7 +54,7 @@ function Hero() {
       <div className="hero__glow" />
       <div className="container hero__inner">
         <div className="hero__content">
-          <span className="pill">Tersedia untuk magang &amp; kerja sama</span>
+          <span className="pill">Tersedia untuk kerja sama</span>
           <h1 className="hero__title">
             Hai, saya <span className="grad">{profile.nama}</span>
           </h1>
@@ -139,7 +139,7 @@ function Tentang() {
           <div className="about__badges">
             <span>📍 {profile.lokasi}</span>
             <span>🎓 Sistem Informasi</span>
-            <span>💼 Siap magang</span>
+            <span>💼 Terbuka kerja sama</span>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@ function Tentang() {
   )
 }
 
-function ProjectCard({ p }) {
+function ProjectCard({ p, onOpen }) {
   return (
     <article className={`card ${p.utama ? 'card--featured' : ''}`}>
       {p.utama && <span className="card__ribbon">Andalan</span>}
@@ -163,15 +163,82 @@ function ProjectCard({ p }) {
         ))}
       </ul>
       <div className="card__bottom">
-        <a className="card__link" href={p.repo} target="_blank" rel="noreferrer">
-          Lihat Repo →
+        <button className="card__link card__link--btn" onClick={() => onOpen(p)}>
+          Detail &amp; Screenshot →
+        </button>
+        <a className="card__repo" href={p.repo} target="_blank" rel="noreferrer">
+          Repo
         </a>
       </div>
     </article>
   )
 }
 
+function ProjectModal({ p, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [onClose])
+
+  if (!p) return null
+  const shots = p.screenshots && p.screenshots.length ? p.screenshots : []
+
+  return (
+    <div className="modal" onClick={onClose}>
+      <div className="modal__box" onClick={(e) => e.stopPropagation()}>
+        <button className="modal__close" onClick={onClose} aria-label="Tutup">
+          ×
+        </button>
+        <span className="card__type">{p.tipe} · {p.tahun}</span>
+        <h3 className="modal__title">{p.judul}</h3>
+        <p className="modal__desc">{p.deskripsi}</p>
+
+        <h4 className="modal__sub">Fitur Utama</h4>
+        <ul className="modal__features">
+          {p.fitur.map((f) => (
+            <li key={f}>{f}</li>
+          ))}
+        </ul>
+
+        <h4 className="modal__sub">Teknologi</h4>
+        <ul className="card__tech">
+          {p.tech.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+
+        <h4 className="modal__sub">Screenshot</h4>
+        {shots.length > 0 ? (
+          <div className="shots">
+            {shots.map((s, i) => (
+              <img key={i} src={s} alt={`${p.judul} — tampilan ${i + 1}`} loading="lazy" />
+            ))}
+          </div>
+        ) : (
+          <p className="shots__empty">
+            Screenshot belum tersedia. (Ganti gambar dengan menaruh file di{' '}
+            <code>public/screenshots/</code> lalu isi daftarnya di{' '}
+            <code>src/data/projects.js</code>.)
+          </p>
+        )}
+
+        <div className="modal__actions">
+          <a className="btn btn--primary" href={p.repo} target="_blank" rel="noreferrer">
+            Buka di GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Proyek() {
+  const [active, setActive] = useState(null)
   return (
     <section id="proyek" className="section section--alt">
       <div className="container">
@@ -179,16 +246,17 @@ function Proyek() {
           <span className="section__kicker">Portfolio</span>
           <h2>Proyek Pilihan</h2>
           <p className="section__sub">
-            Kumpulan karya yang sudah saya publikasikan di GitHub. Klik &quot;Lihat Repo&quot; untuk
-            melihat kode sumbernya.
+            Kumpulan karya yang sudah saya publikasikan di GitHub. Klik kartu untuk melihat detail,
+            fitur, dan screenshot tampilannya.
           </p>
         </div>
         <div className="grid">
           {projects.map((p) => (
-            <ProjectCard key={p.id} p={p} />
+            <ProjectCard key={p.id} p={p} onOpen={setActive} />
           ))}
         </div>
       </div>
+      {active && <ProjectModal p={active} onClose={() => setActive(null)} />}
     </section>
   )
 }
@@ -225,18 +293,26 @@ function Kontak() {
         <div className="cta">
           <h2>Mari Terhubung</h2>
           <p>
-            Saya terbuka untuk kesempatan magang, proyek freelance, atau sekadar berdiskusi tentang
-            teknologi. Silakan hubungi saya lewat email atau GitHub.
+            Saya terbuka untuk kerja sama, proyek freelance, atau sekadar berdiskusi tentang teknologi.
+            Silakan hubungi saya lewat WhatsApp, email, atau GitHub.
           </p>
           <div className="cta__actions">
-            <a className="btn btn--primary" href={`mailto:${profile.email}`}>
+            <a className="btn btn--primary" href={profile.waLink} target="_blank" rel="noreferrer">
+              WhatsApp
+            </a>
+            <a className="btn btn--ghost" href={`mailto:${profile.email}`}>
               Kirim Email
             </a>
             <a className="btn btn--ghost" href={profile.github} target="_blank" rel="noreferrer">
               Profil GitHub
             </a>
           </div>
-          <p className="cta__mail">{profile.email}</p>
+          <div className="cta__contact">
+            <a href={profile.waLink} target="_blank" rel="noreferrer">
+              📱 {profile.whatsapp}
+            </a>
+            <a href={`mailto:${profile.email}`}>✉️ {profile.email}</a>
+          </div>
         </div>
       </div>
     </section>

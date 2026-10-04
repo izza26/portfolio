@@ -7,13 +7,15 @@ export const profile = {
   peran: 'Mahasiswa Sistem Informasi',
   kampus: 'Universitas Trunojoyo Madura',
   nim: '230441100180',
-  lokasi: 'Madura, Jawa Timur, Indonesia',
+  lokasi: 'Sidoarjo, Jawa Timur, Indonesia',
   tagline: 'Membangun solusi digital dari AI, Web, Mobile, sampai Database.',
   deskripsi:
     'Mahasiswa Sistem Informasi yang tertarik pada pengembangan aplikasi end-to-end. ' +
     'Terbiasa mengerjakan proyek mulai dari Computer Vision & AI (OCR, RAG), ' +
     'pengembangan Web (Laravel, PHP), aplikasi Mobile (Flutter), sampai perancangan Basis Data (MySQL).',
-  email: 'arhamizfegianti@gmail.com',
+  email: 'izzafegianti@gmail.com',
+  whatsapp: '085607198136', // format lokal
+  waLink: 'https://wa.me/6285607198136', // format internasional untuk link
   github: 'https://github.com/izza26',
   linkedin: '', // isi kalau ada
 }
@@ -58,6 +60,10 @@ export const projects = [
       'Dashboard manajemen tamu',
     ],
     tech: ['Python', 'FastAPI', 'YOLOv8', 'Tesseract', 'OpenCV', 'AES-256'],
+    screenshots: [
+      // Taruh file di public/screenshots/ lalu isi path-nya di sini, contoh:/n      // '/screenshots/ktp-1.png',
+      // '/screenshots/ktp-2.png',
+    ],
     repo: 'https://github.com/izza26/ai-ktp-ocr-alpr',
     utama: true,
   },
@@ -81,6 +87,10 @@ export const projects = [
       'Jawaban berbasis dokumen (grounded)',
     ],
     tech: ['Python', 'LangChain', 'ChromaDB', 'Streamlit', 'Ollama'],
+    screenshots: [
+      // Taruh file di public/screenshots/ lalu isi path-nya di sini, contoh:/n      // '/screenshots/rag-1.png',
+      // '/screenshots/rag-2.png',
+    ],
     repo: 'https://github.com/izza26/ai-rag-regulasi-bank',
     utama: true,
   },
@@ -104,6 +114,10 @@ export const projects = [
       'Database PostgreSQL (Supabase)',
     ],
     tech: ['Laravel 12', 'PHP 8.2', 'PostgreSQL', 'Supabase', 'Gemini API'],
+    screenshots: [
+      // Taruh file di public/screenshots/ lalu isi path-nya di sini, contoh:/n      // '/screenshots/geotrax-1.png',
+      // '/screenshots/geotrax-2.png',
+    ],
     repo: 'https://github.com/izza26/web-geotrax-penilaian-sdm',
     utama: true,
   },
@@ -127,6 +141,10 @@ export const projects = [
       'Struktur proyek Flutter rapi',
     ],
     tech: ['Flutter', 'Dart', 'Android'],
+    screenshots: [
+      // Taruh file di public/screenshots/ lalu isi path-nya di sini, contoh:/n      // '/screenshots/flutter-1.png',
+      // '/screenshots/flutter-2.png',
+    ],
     repo: 'https://github.com/izza26/praktikum-flutter-pemrograman-bergerak',
     utama: false,
   },
@@ -150,6 +168,10 @@ export const projects = [
       'Proyek NetBeans rapi',
     ],
     tech: ['Java', 'Java Swing', 'NetBeans', 'JDBC', 'MySQL'],
+    screenshots: [
+      // Taruh file di public/screenshots/ lalu isi path-nya di sini, contoh:/n      // '/screenshots/java-1.png',
+      // '/screenshots/java-2.png',
+    ],
     repo: 'https://github.com/izza26/pemrograman-visual-3B-2024',
     utama: false,
   },
@@ -173,6 +195,10 @@ export const projects = [
       'Dokumentasi struktur database',
     ],
     tech: ['MySQL', 'SQL', 'ERD'],
+    screenshots: [
+      // Taruh file di public/screenshots/ lalu isi path-nya di sini, contoh:/n      // '/screenshots/smbd-1.png',
+      // '/screenshots/smbd-2.png',
+    ],
     repo: 'https://github.com/izza26/praktikum-smbd-mysql',
     utama: false,
   },
